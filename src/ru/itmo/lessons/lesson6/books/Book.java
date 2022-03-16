@@ -9,6 +9,10 @@ public class Book {
     private int pageCount; // количество страниц
     private Author author; // автор
 
+    // конструктор вызывается в момент создания объекта: new Book()
+
+    // конструктор по умолчанию нужно явно указывать,
+    // если есть конструкторы с параметрами и нужен конструктор без них
     public Book(){}
 
     public Book(Author author) {
@@ -16,12 +20,9 @@ public class Book {
     }
 
     public Book(String title, Author author){
-        // вызвать другой конструктор
-        this(author);
-        setTitle(title);
+        this(author); // вызов конструктора
+        setTitle(title); // вызов метода
     }
-
-
 
     // методы, позволяющие установить значения свойств
     // со всеми необходимыми проверками - сеттеры
@@ -51,6 +52,14 @@ public class Book {
 
     public Author getAuthor() {
         return author;
+    }
+
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", pageCount=" + pageCount +
+                ", author=" + author +
+                '}';
     }
 }
 

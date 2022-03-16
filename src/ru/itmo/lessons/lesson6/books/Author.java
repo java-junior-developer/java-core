@@ -19,5 +19,10 @@ public class Author {
         return name + " " + surname;
     }
 
-
+    public String toString() {
+        return "Author{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 }
