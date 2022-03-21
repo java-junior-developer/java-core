@@ -35,4 +35,7 @@ abstract public class Unit {
     public boolean isAlive() {
         return healthScore > 0;
     }
+
+    // абстрактный метод - метод без реализации (без {})
+    public abstract void rest();
 }

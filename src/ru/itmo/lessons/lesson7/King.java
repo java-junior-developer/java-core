@@ -2,8 +2,8 @@ package ru.itmo.lessons.lesson7;
 
 import ru.itmo.lessons.lesson7.base.BattleUnit;
 import ru.itmo.lessons.lesson7.base.Unit;
-
-public class King extends Unit {
+/* ... extends King */
+public final class King extends Unit {
     private int gold = 500;
     private BattleUnit[] army;
 
@@ -22,43 +22,42 @@ public class King extends Unit {
         gold -= count;
     }
 
-    public void generateArmy(){
-        if (gold < 250) { // если у короля нет достаточного количества золота, армия не может быть создана
-            System.out.println("Недостаточно золота для создании армии");
+    public void generateArmy(){ // 250
+        if (gold < 250) {
+            System.out.println("Стоимость армии 250. У короля " + gold);
             return;
         }
-        minusGold(250); // стоимость армии - 250 золота
-        army = new BattleUnit[20];
-        for (int i = 0; i < 3; i++) { // три первых юнита в армии - рыцари (Knight)
-            int healthScore = (int) (10 + Math.random() * 40);
-            int attackScore = (int) (7 + Math.random() * 13);
-            army[i] = new Knight(healthScore, attackScore);
-        }
+        gold -= 250;
+        army = BattleUnit.getBattleUnits(20);
+    }
 
-        for (int i = 3; i < army.length; i++) { // остальные юниты - пехотинцы (Infantry)
-            int healthScore = (int) (10 + Math.random() * 40);
-            int attackScore = (int) (7 + Math.random() * 13);
-            army[i] = new Infantry(healthScore, attackScore);
+    // заменяет погибших юнитов новыми
+    public void changeUnits(){  // 20
+        /*if (gold < 20) {
+            System.out.println("Стоимость одного юнита 20. У короля" + gold);
+            return;
+        }*/
+        for (int i = 0; i < army.length; i++) {
+            if (gold < 20) {
+                System.out.println("Стоимость одного юнита 20. У короля" + gold);
+                return;
+            }
+            if (army[i] != null && !army[i].isAlive()) {
+                gold -= 20;
+                army[i] = BattleUnit.getBattleUnit();
+            }
         }
     }
 
-    // заменяет погибших юнитов новыми рыцарями
-    public void changeUnits(){
-        if (gold < 20) { // заменять можно, пока у короля хватает золота
-            System.out.println("Недостаточно золота для создании юнита");
-            return;
-        }
+    public void startBattle(King enemy){
+        // iter
+        /* for (BattleUnit battleUnit : army) { } */
         for (int i = 0; i < army.length; i++) {
-            if (gold < 20) { // заменять можно, пока у короля хватает золота
-                System.out.println("Недостаточно золота для создании юнита");
-                return;
-            }
-            minusGold(20); // стоимость одной замены - 20 золота
-            if (army[i] != null && !army[i].isAlive()) {
-                int healthScore = (int) (10 + Math.random() * 40);
-                int attackScore = (int) (7 + Math.random() * 13);
-                army[i] = new Knight(healthScore, attackScore);
-            }
+            int unitIndex = (int) (Math.random() * army.length);
+            int enemyUnitIndex = (int) (Math.random() * enemy.army.length);
+            army[unitIndex].attack(enemy.army[enemyUnitIndex]);
+            army[unitIndex].rest();
+            enemy.army[enemyUnitIndex].rest();
         }
     }
 
@@ -69,6 +68,14 @@ public class King extends Unit {
             if (battleUnit.isAlive()) count += 1;
         }
         return count;
+    }
+    // реализация абстрактного метода
+    @Override
+    public void rest(){
+        // minusGold(50);
+        gold -= 50;
+        plusHealth(5);
+        System.out.println("Отдых короля");
     }
 }
 
