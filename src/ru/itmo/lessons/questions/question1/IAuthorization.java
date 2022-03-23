@@ -1,4 +1,4 @@
-package ru.itmo.lessons.lesson9.questions.question1;
+package ru.itmo.lessons.questions.question1;
 
 public interface IAuthorization {
     default void enterInfo() {

@@ -1,4 +1,4 @@
-package ru.itmo.lessons.lesson9.questions.question2;
+package ru.itmo.lessons.questions.question2;
 
 public class Parent {
     public int void1(){

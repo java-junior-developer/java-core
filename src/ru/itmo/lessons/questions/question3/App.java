@@ -1,4 +1,4 @@
-package ru.itmo.lessons.lesson9.questions.question3;
+package ru.itmo.lessons.questions.question3;
 
 public class App {
     public static void main(String[] args) {
