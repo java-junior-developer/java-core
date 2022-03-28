@@ -28,6 +28,38 @@ public class Application {
         Country country = Country.valueOf("UK"); // UK
         System.out.println(country); // UK
 
+        Priority low = Priority.LOW;
+        System.out.println(low.getCode()); // 1
+
+        low.setCode(2);
+        System.out.println(low.getCode()); // 2
+
+        Priority[] priorities = Priority.values();
+        for (Priority value : priorities) {
+            System.out.println(value.getCode());
+        }
+
+        // по умолчанию name() и toString()
+        // возвращают одно значение, НО
+        // name() переопределить нельзя (он final)
+        // toString() переопределить можно
+        System.out.println(Priority.LOW.name());
+        System.out.println(Priority.LOW.toString());
+
+        int sumRes = Operation.SUM.action(2, 3);
+        System.out.println(sumRes);
+
+        int multiRes = Operation.MULTI.action(2, 3);
+        System.out.println(multiRes);
+
+//        Operation.SUM.some();
+
+        // создать enum, перечисляющий 3 любые планеты солнечной системы
+        // в методе main перебрать массив с элементами
+        // перечисления, вывести массу, радиус и название
+        // каждой планеты
+        // значения всех свойств изначально задаются через конструктор
+        // должна быть возможность изменить массу и радиус планет
 
 
     }
