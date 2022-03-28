@@ -13,5 +13,8 @@ public class App {
 
         System.out.println(util2.max);
         System.out.println(util1.min);
+
+        System.out.println(Util.PI);
+        System.out.println(Util.random(2, 67));
     }
 }
