@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Storage {
     private String[] strings;
+    private int lastIndex; // значение по умолчанию 0, тк тип int
 
     public Storage(int len) {
         if (len < 1) {
@@ -12,7 +13,14 @@ public class Storage {
         strings = new String[len];
     }
 
-    public void addString(String newString) { }
+    public void addString(String newString) {
+        if (lastIndex == strings.length) {
+            System.out.println("Элементу " + newString + "не хватило места");
+            return;
+        }
+        strings[lastIndex] = newString; // ["1", "2", "3", "4"]
+        lastIndex += 1;
+    }
 
     @Override
     public String toString() {
