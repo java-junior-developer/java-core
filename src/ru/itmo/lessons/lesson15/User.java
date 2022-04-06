@@ -14,6 +14,7 @@ public class User {
         this.role = role;
         this.age = age;
     }
+    // геттеры, equals, hashCode, toString
 
     public String getLogin() {
         return login;
