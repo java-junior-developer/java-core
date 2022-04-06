@@ -59,7 +59,7 @@ public class MapLesson {
         System.out.println("---Перебор мап---");
         for (Map.Entry<String, Integer> pair: hashMap.entrySet()){
             System.out.println("город (ключ): " + pair.getKey());
-            System.out.println("количество полупателей (значение): " + pair.getValue());
+            System.out.println("количество покупателей (значение): " + pair.getValue());
         }
 
         // TODO: ЗАДАЧИ
