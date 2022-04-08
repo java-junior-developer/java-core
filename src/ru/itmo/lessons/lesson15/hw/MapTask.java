@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MapTask {
     public static void main(String[] args) {
-        // TODO:: написать статический метод, который приннимает на вход мапу (firstTaskMap) и город (city)
+        // TODO:: написать статический метод, который принимает на вход мапу (firstTaskMap) и город (city)
         //  и формирует список (List) логинов, которые соответствуют переданному городу
 
         HashMap<String, String> firstTaskMap = new HashMap<>();
