@@ -12,18 +12,20 @@ public class University {
         return courses.add(Objects.requireNonNull(course));
     }
     public boolean addCourses(List<Course> courses) {
-        return courses.addAll(Objects.requireNonNull(courses));
+        return this.courses.addAll(Objects.requireNonNull(courses));
     }
 
     public List<Course> getCourses() {
         return courses;
     }
 
-    // принимает на вход predicate, возвращает новый список, состоящий из элементов, которые
-    // прошли проверку методом test
+    // принимает на вход predicate, возвращает новый список, состоящий из элементов,
+    // которые прошли проверку методом test
     public List<Course> getFilteredCourses(Predicate<Course> condition) {// условие для фильтрации
         List<Course> filtered = new ArrayList<>();
-
+        for (Course course : courses) {
+            if (condition.test(course)) filtered.add(course);
+        }
         return filtered;
     }
 }
