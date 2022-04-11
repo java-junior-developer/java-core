@@ -18,7 +18,7 @@ public class MapTask {
 
         // TODO:: дан список слов (words).
         //  Написать статический метод, который будет возвращать количество одинаковых слов
-        //  в списке вида Map<String, Integer>, где String - слово и Integer - количество повторений
+        //  в мапе вида Map<String, Integer>, где String - слово и Integer - количество повторений
 
         List<String> words = new ArrayList<>();
         words.add("may");
@@ -58,6 +58,12 @@ public class MapTask {
                 "packages and web page editors now use Lorem Ipsum as their default model text and a search for lorem ipsum will " +
                 "uncover many web sites still uncover in their infancy Various versions uncover have evolved over the years uncover sometimes by accident" +
                 " sometimes on purpose injected humour and the like";
+
+        // Map<String, Long>,
+        // где - ключи (String) - слово,
+        // значения (Long) - частота встречаемости
+        // ArrayList<Map.Entry<String, Long>>
+        // отсортировать список по Long с помощью компаратора
 
     }
 }
