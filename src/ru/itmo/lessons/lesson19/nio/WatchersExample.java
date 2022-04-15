@@ -6,13 +6,16 @@ import java.nio.file.*;
 public class WatchersExample {
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        // создание объекта WatchService (будет следить за событиями по указанному в дальнейшем пути)
+        // создание объекта WatchService
+        // (будет следить за событиями по указанному в дальнейшем пути)
         WatchService watchService = FileSystems.getDefault().newWatchService();
 
         // создаем объект типа Path
+        // Paths.get(путь к файлу или директории); //
         Path path = Paths.get(args[0]);
 
-        // регистрируем path в WatchService на события: создание / удаление / изменение
+        // регистрируем path в WatchService на события:
+        // создание / удаление / изменение
         path.register(watchService,
                 StandardWatchEventKinds.ENTRY_CREATE,
                 StandardWatchEventKinds.ENTRY_DELETE,
@@ -27,6 +30,5 @@ public class WatchersExample {
             }
             key.reset();
         }
-
     }
 }
