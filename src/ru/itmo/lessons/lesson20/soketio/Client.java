@@ -18,10 +18,13 @@ public class Client {
 
 
     public void start() throws Exception {
+        System.out.println("Введите имя");
         String name = scanner.nextLine();
         String messageText;
 
         while (true){
+            // exit
+            // ping
             System.out.println("Введите сообщение");
             messageText = scanner.nextLine();
             sendAndPrintMessage(SimpleMessage.getMessage(name, messageText));
@@ -41,8 +44,6 @@ public class Client {
         Socket socket = new Socket(ip, port);
         return socket;
     }
-
-
 
     public static void main(String[] args) {
         int port = 8090;
