@@ -2,8 +2,9 @@ package ru.itmo.lessons.patterns.singleton;
 
 // ленивая (отложенная) инициализация
 public class Singleton {
-    public String data;
-    private static Singleton instance;
+    // все необходимые методы и свойства
+
+    private static Singleton instance; /* new Singleton()*/
 
     // закрываем возможность создания объекта вне класса
     private Singleton() {}

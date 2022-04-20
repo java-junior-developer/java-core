@@ -7,7 +7,7 @@ public class NutritionFacts {
     private final int calories;
     private final int fat;
 
-    public static class Builder {
+    public static class Builder { // создает экземпляры NutritionFacts
         // обязательные парамерты
         private final int servings;
         // необязательные параметры, инициализируются
@@ -35,7 +35,6 @@ public class NutritionFacts {
             return new NutritionFacts(this);
         }
     }
-
 
     private NutritionFacts(Builder builder){
         servings = builder.servings;

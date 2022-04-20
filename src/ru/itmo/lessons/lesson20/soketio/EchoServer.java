@@ -4,7 +4,35 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+interface Command{
+    void execute();
+
+    static Command getCommand(String command, EchoServer server){
+        if (command.equalsIgnoreCase("count")) {
+            return new Count(server);
+        }
+        return null;
+    }
+}
+
+class Count implements Command{
+    private EchoServer server;
+
+    public Count(EchoServer server) {
+        this.server = server;
+    }
+
+    @Override
+    public void execute() {
+
+    }
+}
+
+
+
 public class EchoServer {
+
+
     private int port;
     private Connection connection;
 
@@ -18,7 +46,10 @@ public class EchoServer {
             while (true){
                 Socket socket = serverSocket.accept();
                 connection = new Connection(socket);
+
                 printMessage(connection.readMessage());
+                Command command = Command.getCommand(connection.readMessage().getText(), this);
+                command.execute();
                 connection.sendMessage(SimpleMessage.getMessage("server", "сообщение получено"));
             }
         }
@@ -39,3 +70,15 @@ public class EchoServer {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+

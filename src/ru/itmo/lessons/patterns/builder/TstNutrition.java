@@ -2,6 +2,7 @@ package ru.itmo.lessons.patterns.builder;
 
 public class TstNutrition {
     public static void main(String[] args) {
+        //  // Builder: servings: 3, calories: 200, fat: 4
         NutritionFacts appleFacts =
                 new NutritionFacts.Builder(3)
                 .calories(200)

@@ -2,6 +2,7 @@ package ru.itmo.lessons.patterns.observer;
 
 import java.util.Scanner;
 
+
 public class TstListener {
     public static void main(String[] args) {
         EventListener firstListener = new EventListener() {
