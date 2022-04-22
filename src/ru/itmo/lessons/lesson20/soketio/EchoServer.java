@@ -4,30 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-interface Command{
-    void execute();
-
-    static Command getCommand(String command, EchoServer server){
-        if (command.equalsIgnoreCase("count")) {
-            return new Count(server);
-        }
-        return null;
-    }
-}
-
-class Count implements Command{
-    private EchoServer server;
-
-    public Count(EchoServer server) {
-        this.server = server;
-    }
-
-    @Override
-    public void execute() {
-
-    }
-}
-
 
 
 public class EchoServer {
@@ -35,9 +11,26 @@ public class EchoServer {
 
     private int port;
     private Connection connection;
+    private int count;
 
     public EchoServer(int port){
         this.port = port;
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public void start() throws IOException, ClassNotFoundException {
@@ -46,11 +39,10 @@ public class EchoServer {
             while (true){
                 Socket socket = serverSocket.accept();
                 connection = new Connection(socket);
+                count += 1;
 
-                printMessage(connection.readMessage());
-                Command command = Command.getCommand(connection.readMessage().getText(), this);
-                command.execute();
-                connection.sendMessage(SimpleMessage.getMessage("server", "сообщение получено"));
+                SimpleMessage message = connection.readMessage();
+
             }
         }
     }

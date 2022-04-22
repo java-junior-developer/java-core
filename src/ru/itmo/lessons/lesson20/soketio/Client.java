@@ -2,6 +2,8 @@ package ru.itmo.lessons.lesson20.soketio;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Client {
@@ -33,9 +35,19 @@ public class Client {
 
     private void sendAndPrintMessage(SimpleMessage message) throws Exception {
         try (Connection connection = new Connection(getSocket())){ // getSocket Только для того, чтобы посмотреть методы сокета
+
+            LocalDateTime time = null;
+            if (message.getText().equalsIgnoreCase("ping")) {
+                time = LocalDateTime.now();
+            }
             connection.sendMessage(message);
 
             SimpleMessage formServer = connection.readMessage();
+            if (formServer.getText().equalsIgnoreCase("ping")) {
+                String str = "ping: " + Duration.between(time, LocalDateTime.now()).getNano();
+            }
+
+
             System.out.println("ответ от сервера: " + formServer);
         }
     }
