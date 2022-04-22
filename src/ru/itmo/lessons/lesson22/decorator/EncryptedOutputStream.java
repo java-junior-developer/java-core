@@ -12,8 +12,7 @@ public class EncryptedOutputStream extends FilterOutputStream {
     }
     @Override
     public void write(byte[] b) throws IOException {
-        // шифрование
-        // вызвали метод write родителя,
-        // передали зашифрованные данные
+        // 1. шифрование
+        // 2. вызвали метод write родителя, передали зашифрованные данные
     }
 }
