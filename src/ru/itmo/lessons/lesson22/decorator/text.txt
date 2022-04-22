@@ -1,0 +1,7 @@
+String key = "tgege";
+
+// шифрует данные ^ (xor) write(byte[] b)
+// дешифрует данные ^ (xor) read(byte[] b)
+
+шифрует данные extends FilterOutputStream
+дешифрует данные extends FilterInputStream

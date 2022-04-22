@@ -5,10 +5,19 @@ public class TstLogging {
         ClassInProgram inProgram = new ClassInProgram(new ConsoleLogging());
         inProgram.action();
 
-        inProgram.setStrategy(new DateDecorator(new FileLogging()));
+        inProgram.setStrategy(new FileLogging());
         inProgram.action();
 
         inProgram.setStrategy(new DateDecorator(new CodeDecorator(new ConsoleLogging())));
         inProgram.action();
+
+
+
+        ILog logger = new FileLogging();
+        ILog dateDecorator = new DateDecorator(logger);
+
+        dateDecorator.log("данные");
+
+
     }
 }
