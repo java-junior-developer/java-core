@@ -1,5 +1,5 @@
 package ru.itmo.lessons.patterns.decorator;
 
-public interface LogStrategy {
+public interface ILog {
     void log(String data);
 }

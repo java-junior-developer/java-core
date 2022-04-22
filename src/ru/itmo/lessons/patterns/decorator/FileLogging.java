@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-public class FileLogging implements LogStrategy {
+public class FileLogging implements ILog {
     @Override
     public void log(String data) {
         try {

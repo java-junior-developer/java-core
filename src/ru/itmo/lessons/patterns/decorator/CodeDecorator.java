@@ -3,7 +3,7 @@ package ru.itmo.lessons.patterns.decorator;
 import java.util.UUID;
 
 public class CodeDecorator extends BaseDecorator{
-    public CodeDecorator(LogStrategy logger) {
+    public CodeDecorator(ILog logger) {
         super(logger);
     }
 

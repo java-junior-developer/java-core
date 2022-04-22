@@ -3,7 +3,7 @@ package ru.itmo.lessons.patterns.decorator;
 import java.time.LocalDateTime;
 
 public class DateDecorator extends BaseDecorator{
-    public DateDecorator(LogStrategy logger) {
+    public DateDecorator(ILog logger) {
         super(logger);
     }
 

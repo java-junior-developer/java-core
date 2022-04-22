@@ -1,9 +1,9 @@
 package ru.itmo.lessons.patterns.decorator;
 
-public abstract class BaseDecorator implements LogStrategy {
-    private LogStrategy logger;
+public abstract class BaseDecorator implements ILog {
+    private ILog logger;
 
-    public BaseDecorator(LogStrategy logger) {
+    public BaseDecorator(ILog logger) {
         this.logger = logger;
     }
 
