@@ -15,7 +15,7 @@ public class AnnotationLesson {
         // проверить наличие аннотации
         if (catClass.isAnnotationPresent(ClassConfig.class)){
             System.out.println("ClassConfig");
-            // получение ссылки на аннотацию
+            // получение ссылки на аннотацию для получения параметров
             ClassConfig classConfig = catClass.getDeclaredAnnotation(ClassConfig.class);
             // получим значения свойств: prefix, version и file
             System.out.println("prefix: " + classConfig.prefix());

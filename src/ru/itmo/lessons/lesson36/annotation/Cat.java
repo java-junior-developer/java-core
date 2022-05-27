@@ -4,6 +4,8 @@ package ru.itmo.lessons.lesson36.annotation;
 public class Cat {
     @Required
     private String name;
+
+    @Required
     private int age;
 
     public String getName() {

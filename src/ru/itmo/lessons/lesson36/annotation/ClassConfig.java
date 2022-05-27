@@ -13,3 +13,8 @@ public @interface ClassConfig {
     String configFile() default "config.properties"; // есть значение параметра по умолчанию
     long version() default 1; // есть значение параметра по умолчанию
 }
+// @Required
+// @ClassConfig(prefix = "имя", configFile = "file.txt", version = 2)
+// @ClassConfig(prefix = "имя", version = 2)
+// @ClassConfig(prefix = "имя", configFile = "file.txt")
+// @ClassConfig(prefix = "имя")

@@ -1,10 +1,17 @@
 package ru.itmo.lessons.lesson36.reflection;
 
+import ru.itmo.lessons.lesson13.wildcards.Cat;
+
 import java.lang.reflect.*;
 import java.util.Arrays;
 
 public class ReflectionLesson {
-    public static void main(String[] args) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException, NoSuchFieldException {
+    public static void main(String[] args) throws
+            IllegalAccessException,
+            NoSuchMethodException,
+            InvocationTargetException,
+            InstantiationException,
+            NoSuchFieldException {
         /*
         Рефлексия в Java — это механизм, с помощью которого можно вносить изменения
         и получать информацию о классах, интерфейсах, полях и методах
@@ -14,6 +21,9 @@ public class ReflectionLesson {
         */
 
         // Все классы в языке являются объектами типа Class (даже примитивы).
+        // Все свойства являются объектами типа Field
+        // Все методы являются объектами типа Method
+        // Все конструкторы являются объектами типа Constructor
 
         // получение ссылок на классы
         Class<String> stringClass = String.class; // ссылка на класс String
@@ -38,15 +48,22 @@ public class ReflectionLesson {
 
         // получение ссылок на интерфейсы, которые реализует класс (но не родитель)
         Class<?>[] interfaces = textMessageClass.getInterfaces();
-        System.out.println("интерфейсы класса, без учета интерфейсов родителя: " + Arrays.toString(interfaces));
+        System.out.println("интерфейсы класса, без учета интерфейсов родителя: "
+                + Arrays.toString(interfaces));
 
         // получение ссылки на родительский класс
-        System.out.println("родительский класс [1]: " + textMessageClass.getSuperclass());
-        System.out.println("родительский класс [2]: " + textMessageClass.getSuperclass().getSuperclass()); // Object
-        System.out.println("родительский класс [3]: " + textMessageClass.getSuperclass().getSuperclass().getSuperclass()); // null
+        System.out.println("родительский класс [1]: " +
+                textMessageClass.getSuperclass());
+
+        System.out.println("родительский класс [2]: " +
+                textMessageClass.getSuperclass().getSuperclass()); // Object
+
+        System.out.println("родительский класс [3]: " +
+                textMessageClass.getSuperclass().getSuperclass().getSuperclass()); // null
 
         // получение ссылок на интерфейсы родительского класса
-        System.out.println("интерфейсы родительского класса: " + Arrays.toString(textMessageClass.getSuperclass().getInterfaces()));
+        System.out.println("интерфейсы родительского класса: "
+                + Arrays.toString(textMessageClass.getSuperclass().getInterfaces()));
 
 
         textMessageClass = TextMessage.class;
@@ -59,17 +76,26 @@ public class ReflectionLesson {
         Field[] fields = textMessageClass.getFields();
         System.out.println("ссылки на public поля класса: " + Arrays.toString(fields));
 
-        // возвращает ссылки на все поля класса (включая private и protected, но не родителя)
+        // возвращает ссылки на все поля класса
+        // (включая private и protected, но не родителя)
         Field[] declaredFields = textMessageClass.getDeclaredFields();
         System.out.println("ссылки на поля класса: " + Arrays.toString(declaredFields));
 
         // при переборе можно узнать имя, тип, модификаторы и значение каждого поля
-        for (Field field : fields) {
+        for (Field field : declaredFields) {
             System.out.println("имя поля: " + field.getName());
+
             System.out.println("тип поля: " + field.getType());
-            System.out.println("наличие модификатора final: " + Modifier.isFinal(field.getModifiers()));
-            System.out.println("наличие модификатора volatile: " + Modifier.isVolatile(field.getModifiers()));
-            System.out.println("значение поля для конкретного объекта: " + field.get(textMessage));
+
+            System.out.println("наличие модификатора final: " +
+                    Modifier.isFinal(field.getModifiers()));
+
+            System.out.println("наличие модификатора volatile: " +
+                    Modifier.isVolatile(field.getModifiers()));
+
+            field.setAccessible(true);
+            System.out.println("значение поля для конкретного объекта: " +
+                    field.get(textMessage)); // textMessage.code
         }
 
         // получение ссылок на методы
@@ -96,15 +122,25 @@ public class ReflectionLesson {
         Constructor<?>[] declaredConstructors = textMessageClass.getDeclaredConstructors();
         System.out.println("ссылки на конструкторы: " + Arrays.toString(declaredConstructors));
 
+        for (Constructor<?> constructor : declaredConstructors) {
+            System.out.println("количество параметров: " + constructor.getParameterCount());
+            System.out.println("типы параметров: " + Arrays.toString(constructor.getParameterTypes()));
+            System.out.println("выбрасываемые исключения: " + Arrays.toString(constructor.getExceptionTypes()));
+        }
         // создание экземпляров с использованием рефлексии
 
         // в первую очередь необходимо получить ссылку на конструктор,
-        // необходимо знать, последовательность аргументов выбранного конструктора и их типы
-        Constructor<TextMessage> tmConstructor = textMessageClass.getDeclaredConstructor(String.class);
+        // необходимо знать, последовательность аргументов
+        // выбранного конструктора и их типы
+        textMessageClass = TextMessage.class;
+
+        Constructor<TextMessage> tmConstructor =
+                textMessageClass.getDeclaredConstructor(String.class);
 
         // после получения ссылки на конструктор можно создавать экземпляр
         // в метод newInstance необходимо передать экземпляры, передаваемые в конструктор
-        TextMessage reflectMessage = tmConstructor.newInstance("Reflect Message");
+        TextMessage reflectMessage =
+                tmConstructor.newInstance("Reflect Message");
         System.out.println("рефлексивный экземпляр: " + reflectMessage);
 
         // у созданного экземпляра можно вызывать методы и обращаться к свойствам через рефлексию
@@ -116,11 +152,14 @@ public class ReflectionLesson {
 
         // возвращает значение поля для конкретного объекта, если позволяет модификатор доступа,
         // в противном случае - IllegalAccessException
-        System.out.println("значение свойства text объекта reflectMessage: " + textField.get(reflectMessage));
+        System.out.println("значение свойства text объекта reflectMessage: "
+                + textField.get(reflectMessage));
 
         // устанавливает значение поля для конкретного объекта, если позволяет модификатор доступа,
         // в противном случае - IllegalAccessException
-        textField.set(reflectMessage, "Значение поля объекта reflectMessage установлено через рефлексию");
+        // reflectMessage.text = "Значение поля объекта reflectMessage установлено через рефлексию";
+        textField.set(reflectMessage,
+                "Значение поля объекта reflectMessage установлено через рефлексию");
 
         // с рефлексивными объектами можно работать, как с обычными и наоборот
         System.out.println(reflectMessage.getText());
@@ -136,6 +175,17 @@ public class ReflectionLesson {
         printInfoMethod.setAccessible(true);
         printInfoMethod.invoke(reflectMessage);
 
-        // TODO: реализовать рефлексивный метод public static String toString(Object o){ }
+        // TODO:
+        //  Реализовать рефлексивный метод public static void toString(Object obj){ }
+        //  который выводит имя свойства и значения свойства для объекта 'obj'
+        //  если свойство отмечено аннотацией @Excluded, не выводить в консоль информацию
+        //  по данному полю.
+        //  Аннотацию объявить самостоятельно.
+        //  Для теста можно использовать любой объект.
+
+    }
+
+    public static void toString(Object obj){
+        // без родителя и не обрабатываем массивы
     }
 }

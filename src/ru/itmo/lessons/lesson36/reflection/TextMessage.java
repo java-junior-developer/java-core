@@ -5,6 +5,7 @@ public class TextMessage extends Message{
     private String text;
     public final String code = "ТЕКСТОВОЕ СООБЩЕНИЕ";
 
+
     public TextMessage(String sender) {
         super(sender);
     }
@@ -22,7 +23,6 @@ public class TextMessage extends Message{
                 "text(" + text + "), " +
                 "code(" + code + ") ");
     }
-
 
     @Override
     public String toString() {
